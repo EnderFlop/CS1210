@@ -6,7 +6,8 @@ def computeTripData(distanceK, vehSpeedMPS, vehKPL, gasCostPerLiter, breakfastCo
   print("\n\n")
   #The length of the trip in hours
   vehicle_KPS = vehSpeedMPS / 1000 #meters per second to kilometers per second.
-  total_hours = distanceK / vehicle_KPS
+  vehicle_KPH = vehicle_KPS * 60 * 60
+  total_hours = distanceK / vehicle_KPH
   print(f"total_hours = {total_hours}")
 
   driving_days = math.ceil(total_hours / 8) #can only drive 8 hours a day
@@ -67,4 +68,19 @@ def computeTripData(distanceK, vehSpeedMPS, vehKPL, gasCostPerLiter, breakfastCo
 
   return total_hours, total_gas_cost, total_cost, num_breakfasts, num_lunches, num_dinners, num_hotel_nights
 
-#computeTripData(, 1000, 10, 4, 5, 6, 7, 80)
+#computeTripData(40, 1000, 10, 4, 5, 6, 7, 80)
+
+def printTripSummary(vehName, distanceM, vehSpeedMPH, vehMPG, gasCostPerGallon, breakfastCostPerDay, lunchCostPerDay, dinnerCostPerDay, hotelCostPerNight):
+  distanceK = distanceM * 1.60934
+  veh_speed_KPH = vehSpeedMPH * 1.60934
+  veh_speed_MPS = veh_speed_KPH / 3.6 #Kilometer per hour to meter per second conversion
+  veh_KPL = vehMPG * 0.42514
+  gas_cost_per_liter = gasCostPerGallon / 3.78541 #Since a gallon is 3.78541 times a liter, for the same price as a gallon you can get that ratio as much of a liter
+  total_hours, total_gas_cost, total_cost, num_breakfasts, num_lunches, num_dinners, num_hotel_nights = computeTripData(distanceK, veh_speed_MPS, veh_KPL, gas_cost_per_liter, breakfastCostPerDay, lunchCostPerDay, dinnerCostPerDay, hotelCostPerNight)
+  formatted_dollar_amount = "{:.2f}".format(round(total_cost, 2))
+  final_statement = f"{vehName} trip of {distanceM} miles. Hotel nights: 1, Total Cost: ${formatted_dollar_amount}"
+  print(final_statement)
+  return(final_statement)
+
+printTripSummary("Bugatti", 1400.0, 100.0, 20.0, 5.0, 8.0, 12.5, 24.0, 150.0)
+
