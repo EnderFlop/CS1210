@@ -72,3 +72,27 @@ def q2(L, goalX, goalY):
 
 #print(q2([[4, 4], [10, 10]], 1, 8))
 #print(q2([[10, 25], [2, 2], [49, 200]], 50, 8))
+
+def q3(L):
+  summation = []
+  positive_lists = 0
+  maximum_value = None
+  for lst in L:
+    temp_sum = 0
+    pos_vs_neg = 0
+    for item in lst:
+      temp_sum += item
+      if item > 0:
+        pos_vs_neg += 1
+      elif item < 0:
+        pos_vs_neg -= 1
+      if maximum_value == None or item > maximum_value:
+        maximum_value = item
+    if pos_vs_neg >= 1:
+        positive_lists += 1
+    summation.append(temp_sum)
+  return summation, positive_lists, maximum_value
+
+#print(q3([[1, 2, 2], [3]]))
+#print(q3([[0, 1, 0], [], [-1, 100]]))
+#print(q3([]))
