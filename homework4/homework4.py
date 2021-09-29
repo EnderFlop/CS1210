@@ -60,8 +60,9 @@ def q1(infoDict, listOfLists):
 #print(q1( {1:"purple", 2:"red", 3:"blue", 25:"red"}, [[4], [2,3,3], [1,2,3], [17]] ))
 
 def q2(filename, minWordLengthToConsider = 1):
-  text = open(filename, "r")
-  text_list = [i for i in text]
-  print(text_list)
+  text = open(filename, "r", encoding="utf8")
+  for i in text:
+    print(i)
+  #print(text_list)
 
 print(q2("SMScollection.txt"))
