@@ -85,6 +85,16 @@ def sort_dict(dict, min_word_length, number_of_words):
     final_dict[most_common_words[i]] = valid_dict[most_common_words[i]]
   return final_dict
 
+#2b. Spam messages have multiple ways to be identified. You can look at word choice
+# (free, call, congratulations, guaranteed all appear very often) or you can determine based 
+# on numbers in the message (spam messages often have phone numbers). The length of spam
+# messages are also almost double ham messages, with average 23.91 words vs 14.26.
+#
+# This homework was complicated, and working with a dirty real world dataset was interesting.
+# It felt kind of clunky to do everything twice for ham and spam messages but I guess there
+# isn't really a better way. Sorting the dictionary to find the X most common words was the
+# hardest part for me.
+
 def q2(filename, minWordLengthToConsider = 1):
   #cleaning up dataset and making unique lists
   text = open(filename, encoding="utf-8").read()
@@ -133,6 +143,7 @@ def q2(filename, minWordLengthToConsider = 1):
   print(f"There were {ham_list_length} ham messages.")
   print(f"There were a total of {ham_word_length} words in ham messages.")
   print(f"There were a total of {ham_unique_length} unique words in ham messages.")
+  print(f"The average length of a ham message was {round(ham_average, 2)} words.")
   print(f"The ten most common words (of the length requested), the number they occurred, and their frequencies in ham messages are:")
   for k, v in ham_final.items():
     print(f"{k}: {v[0]} times, {round(v[1]*100, 2)}% frequency.")
@@ -141,9 +152,10 @@ def q2(filename, minWordLengthToConsider = 1):
   print(f"There were {spam_list_length} spam messages.")
   print(f"There were a total of {spam_word_length} words in spam messages.")
   print(f"There were a total of {spam_unique_length} unique words in spam messages.")
+  print(f"The average length of a spam message was {round(spam_average, 2)} words.")
   print(f"The ten most common words (of the length requested), the number they occurred, and their frequencies in spam messages are:")
   for k, v in spam_final.items():
     print(f"{k}: {v[0]} times, {round(v[1]*100, 2)}% frequency.")
   print("\n******************\n")
 
-#q2("SMScollection.txt", 10)
+#q2("SMScollection.txt", 1)
