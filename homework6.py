@@ -1,3 +1,5 @@
+import random
+
 def hawkID():
     return("agbarloon")
 
@@ -119,3 +121,105 @@ def testBox():
   print(box4.contains(box3) == True)
 
 #testBox()
+
+class NimGame:
+  def __init__(self, heaps):
+    self.heaps = heaps
+    print(f"Nim game initialized with {len(heaps)} heaps.")
+  
+  def __repr__(self):
+    string = f"< Nim game with {len(self.heaps)} heaps."
+    for i in range(len(self.heaps)):
+      string += f"\n\tHeap {i}: {self.heaps[i]} balls."
+    string += "\n>"
+    return string
+
+  def remove(self, heap, balls):
+    if self.heaps[heap] < balls:
+      print(f"You can't take that many balls from heap {heap}, try again.")
+      return
+    else:
+      print(f"You took {balls} balls from heap {heap}.")
+      self.heaps[heap] -= balls
+    
+    print(self)
+
+    if sum(self.heaps) == 0:
+      print("Player Wins!")
+    else:
+      heap_choice = random.randint(0, len(self.heaps)-1)
+      while self.heaps[heap_choice] == 0:
+        heap_choice = random.randint(0, len(self.heaps)-1)
+      ball_count = random.randint(1, self.heaps[heap_choice])
+      print(f"Computer took {ball_count} balls from heap {heap_choice}.")
+      self.heaps[heap_choice] -= ball_count
+      if sum(self.heaps) == 0:
+        print("Computer Wins!")
+
+#game = NimGame([2,3,4])
+#print(game)
+
+class Animal ():
+    
+    numAnimals = 0
+
+    def __init__ (self, name = 'NoName', numLegs = 0):
+        self.name = name
+        self.numLegs = numLegs
+        Animal.numAnimals = Animal.numAnimals + 1
+        self.id = Animal.numAnimals
+
+    def setName(self, name):
+        self.name = name
+        
+    def getName(self):
+        return self.name
+    
+    def getNumLegs(self):
+        return self.numLegs
+   
+    def speak(self):
+        print("...")
+
+    def __repr__(self):
+        return ('<{} the animal. ID:{}>'.format(self.name, self.id))
+
+class Cat(Animal):
+    def __init__(self, name = 'noname', furColor = 'unknown'):
+        Animal.__init__(self, name, 4)
+        self.color = furColor
+    
+    def speak(self):
+        print('meow')
+
+    def getFurColor(self):
+        return self.color
+
+    def __repr__(self):
+        return ('<{} the {} cat. ID: {}>'.format(self.name, self.color, self.id))
+
+class Dog(Animal):
+    
+    def __init__(self, name = 'rover'):
+        Animal.__init__(self, name, 4)
+    
+    def speak(self):
+        print('woof')
+        
+    def fetch(self):
+        print("I'm fetching ...")
+
+    def __repr__(self):
+        return '<{} the dog. ID:{}>'.format(self.name, self.id)
+
+        
+def testAnimal():
+    c1 = Cat("Milo")
+    c2 = Cat(furColor = "black")
+    d1 = Dog()
+    d2 = Dog()
+    for animal in [c1, c2, d1, d2]:
+        print(animal)
+        animal.speak()
+    d1.fetch()
+    print(c2.getFurColor())
