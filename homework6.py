@@ -147,9 +147,8 @@ class NimGame:
     if sum(self.heaps) == 0:
       print("Player Wins!")
     else:
-      heap_choice = random.randint(0, len(self.heaps)-1)
-      while self.heaps[heap_choice] == 0:
-        heap_choice = random.randint(0, len(self.heaps)-1)
+      valid_heaps = [i for i in range(len(self.heaps)) if self.heaps[i] != 0]
+      heap_choice = random.choice(valid_heaps)
       ball_count = random.randint(1, self.heaps[heap_choice])
       print(f"Computer took {ball_count} balls from heap {heap_choice}.")
       self.heaps[heap_choice] -= ball_count
@@ -212,14 +211,30 @@ class Dog(Animal):
     def __repr__(self):
         return '<{} the dog. ID:{}>'.format(self.name, self.id)
 
+class Turtle(Animal):
+  def __init__(self, name="Tungus"):
+    Animal.__init__(self, name, 4)
+
+  def speak(self):
+    print("'Blub' (they say they love you <3)")
+  
+  def swim(self):
+    print("Swimming!")
+  
+  def __repr__(self):
+    return f"<{self.name} the turtle. ID:{self.id}>"
+  
         
 def testAnimal():
     c1 = Cat("Milo")
     c2 = Cat(furColor = "black")
     d1 = Dog()
     d2 = Dog()
-    for animal in [c1, c2, d1, d2]:
+    t1 = Turtle()
+    t2 = Turtle("Roger")
+    for animal in [c1, c2, d1, d2, t1, t2]:
         print(animal)
         animal.speak()
     d1.fetch()
     print(c2.getFurColor())
+    t2.swim()
