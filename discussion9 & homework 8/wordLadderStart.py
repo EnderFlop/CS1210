@@ -5,6 +5,14 @@ from bfs import *
 # in the word graph. Return False otherwise
 #
 def shouldHaveEdge(word1, word2):
+    if len(word1) != len(word2):
+        return False
+    num_differences = 0
+    for i in range(len(word1)):
+        if word1[i] != word2[i]:
+            num_differences += 1
+    if num_differences == 1:
+        return True
     return False
 
 # Give a file of words, return a graph with
@@ -14,6 +22,15 @@ def shouldHaveEdge(word1, word2):
 #
 def buildWordGraph(wordsFile):
     wordGraph = Graph()
+    instream = open(wordsFile,"r")
+    for line in instream:
+        word_node = Node(line.strip())
+        wordGraph.addNode(word_node)
+    nodes_list = wordGraph.nodes
+    for node1 in nodes_list:
+        for node2 in nodes_list:
+            if node1 != node2 and not wordGraph.hasEdge(node1, node2) and shouldHaveEdge(node1.getName(), node2.getName()):
+                wordGraph.addEdge(node1, node2)
     return wordGraph
 
 # ASSUMPTION: (modified) breadth first search has already been executed.
@@ -33,7 +50,16 @@ def buildWordGraph(wordsFile):
 #
 def extractWordLadder(endNode):
     ladder = []
-    return ladder
+    if endNode.getStatus() == "unseen":
+      return []
+    current_node = endNode
+    while current_node.
+    return ladder 
+
+wordGraph = buildWordGraph("test2.txt")
+bfs(wordGraph, wordGraph.getNode("cat"))
+print(extractWordLadder(wordGraph.getNode("dog")))
+
 
 def wordLadders(wordsFile):
     global wordGraph # this is useful for debugging - you can "look" at wordGraph
@@ -44,7 +70,6 @@ def wordLadders(wordsFile):
     print("Created word graph with {} nodes and {} edges".format(
         len(wordGraph.nodes),
         sum(len(adjList) for adjList in wordGraph.adjacencyLists.values())//2))
-
 
     # 2. user interaction loop:
     #    - check that the give word or words are in the dictionary
@@ -80,7 +105,6 @@ def wordLadders(wordsFile):
             # should set distance properties of all words reachable from start
             # word, and also set "parent" properties appropriately.
             bfs(wordGraph, startNode)
-
             # If only one word was given, look through all nodes in the graph
             # to find one with max distance property. That word is the one with
             # the maximal "shortest distance" from start word.
@@ -111,5 +135,4 @@ def wordLadders(wordsFile):
         userInput = input("Enter start and end words OR start word OR 'q' to quit: ")
         words = userInput.split()
                                    
-
-
+#wordLadders("test2.txt")
