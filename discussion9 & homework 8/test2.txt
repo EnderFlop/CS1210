@@ -1,0 +1,5 @@
+cat
+cot
+dot
+dog
+lop
