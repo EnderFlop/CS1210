@@ -6,12 +6,26 @@ class Node(object):
     def __init__(self, name):
         self.name = name
         self.status = 'unseen'
+        self.parent = None
+        self.distance = None
         
     def getName(self):
         return self.name
 
     def getStatus(self):
         return self.status
+
+    def getParent(self):
+        return self.parent
+    
+    def getDistance(self):
+        return self.distance
+
+    def setParent(self, parent):
+        self.parent = parent
+    
+    def setDistance(self, distance):
+        self.distance = distance
 
     # should be one of 'unseen', 'seen', 'processed'
     def setStatus(self, status):

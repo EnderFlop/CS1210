@@ -50,14 +50,18 @@ def buildWordGraph(wordsFile):
 #
 def extractWordLadder(endNode):
     ladder = []
-    if endNode.getStatus() == "unseen":
+    if endNode == None or endNode.getStatus() == "unseen":
       return []
-    #feels like recursive result is neccesary. I think he will talk about this in class. Testing set up below. Don't be afraid to use wordGraph, it's global.
+    current_node = endNode
+    ladder.append(current_node)
+    while current_node.getParent() != None:
+        ladder.append(current_node.getParent())
+        current_node = current_node.getParent()
     return ladder 
 
-wordGraph = buildWordGraph("test2.txt")
-bfs(wordGraph, wordGraph.getNode("cat"))
-print(extractWordLadder(wordGraph.getNode("dog")))
+#wordGraph = buildWordGraph("test2.txt")
+#bfs(wordGraph, wordGraph.getNode("cat"))
+#print(extractWordLadder(wordGraph.getNode("dog")))
 
 
 def wordLadders(wordsFile):
@@ -134,4 +138,4 @@ def wordLadders(wordsFile):
         userInput = input("Enter start and end words OR start word OR 'q' to quit: ")
         words = userInput.split()
                                    
-#wordLadders("test2.txt")
+wordLadders("test2.txt")

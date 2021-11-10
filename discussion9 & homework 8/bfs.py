@@ -14,6 +14,7 @@ def bfs(graph, startNode):
     #print("Initializing queue with: ", startNode.name)
     queue = Queue()
     queue.enqueue(startNode)
+    startNode.setDistance(0)
     while queue.size() != 0:
         #print(queue)
         currentNode = queue.dequeue()
@@ -21,6 +22,8 @@ def bfs(graph, startNode):
         for node in graph.neighborsOf(currentNode):
             if node.getStatus() == 'unseen':
                 node.setStatus('seen')
+                node.setParent(currentNode)
+                node.setDistance(currentNode.getDistance() + 1)
                 queue.enqueue(node)
         currentNode.setStatus('processed')
 
