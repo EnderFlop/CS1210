@@ -52,14 +52,7 @@ def extractWordLadder(endNode):
     ladder = []
     if endNode.getStatus() == "unseen":
       return []
-    current_node = endNode
-    while True:
-      neighbor_nodes = wordGraph.neighborsOf(current_node)
-      for neighbor in neighbor_nodes:
-        print(f"current node: {current_node}. neighbors: {neighbor_nodes}. ladder: {ladder}")
-        if neighbor not in ladder:
-          current_node = neighbor
-          ladder.append(current_node)
+    #feels like recursive result is neccesary. I think he will talk about this in class. Testing set up below. Don't be afraid to use wordGraph, it's global.
     return ladder 
 
 wordGraph = buildWordGraph("test2.txt")
