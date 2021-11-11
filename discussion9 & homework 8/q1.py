@@ -19,4 +19,4 @@ def q1(num, denom):
   final_string += f"\n{final_list}"
   return final_string
 
-print(q1(761,1000))
+#print(q1(761,1000))
