@@ -50,11 +50,10 @@ def buildWordGraph(wordsFile):
 #
 def extractWordLadder(endNode):
     ladder = []
-    if endNode == None or endNode.getStatus() == "unseen":
-      return []
     current_node = endNode
     ladder.append(current_node)
     while current_node.getParent() != None:
+        print(f"current_node = {current_node}, parent_node = {current_node.getParent()}, distance = {current_node.getDistance()}")
         ladder.append(current_node.getParent())
         current_node = current_node.getParent()
     return ladder 
@@ -138,4 +137,8 @@ def wordLadders(wordsFile):
         userInput = input("Enter start and end words OR start word OR 'q' to quit: ")
         words = userInput.split()
                                    
-wordLadders("test2.txt")
+wordLadders("words5.txt")
+#current issue. When running the program on two different words in the same chain, they become parents of eachother.
+#This can be resolved by remaking the word graph and running a new bfs with a new start node
+#this would modify code that we weren't instructed to touch. Am I assigning the parent wrong? (I don't think so, it works)
+#If not resolved in class on friday, ask in email.
